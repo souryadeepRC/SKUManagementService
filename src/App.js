@@ -1,24 +1,19 @@
-import logo from './logo.svg';
+import { Fragment, useState } from 'react';
 import './App.css';
-
+import Header from './components/Layout/Header/Header';
+import FileUpload from './components/Layout/FileUpload/FileUpload';
 function App() {
+  const [data,setData] = useState(undefined)
+  const retrieveDataHandler = (responseData) => {
+    setData(responseData)
+  }
+  console.log(data);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+      {data && <p>Report</p>}
+      {!data && <FileUpload onFileUpload={retrieveDataHandler}/>}
+    </Fragment>
   );
 }
 
