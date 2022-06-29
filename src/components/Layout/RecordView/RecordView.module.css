@@ -1,0 +1,16 @@
+.go_back_btn{
+    padding: 10px 5px;
+    margin: 8px 0;
+    width: 85%;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    background: #8ae796d9;
+    color: #232362;
+}
+
+@media screen and (min-width:425px) {
+    .go_back_btn{
+        width: 35%;
+    }
+}

@@ -1,0 +1,73 @@
+.filter__section {
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.filter__section>select {
+    padding: 8px;
+    width: 50%;
+    border-color: blueviolet;
+}
+
+.filter__section>select:focus-visible,
+.filter__option input:focus-visible {
+    outline: none;
+}
+
+.filter__option_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid gray;
+}
+
+.filter__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter__option input {
+    padding: 5px 5px;
+    border-radius: 0;
+    border-color: darkviolet;
+    border-width: 1px;
+    margin: 3px 0;
+}
+
+.filter__option_form>button {
+    padding: 10px 5px;
+    margin: 8px 0;
+    width: 50%;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    background: #ddc6f3d9;
+    color: #232362;
+}
+
+@media screen and (min-width:425px) {
+    .filter__section {
+        font-size: 20px;
+    }
+
+    .filter__section>select {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .filter__option {
+        flex-direction: row;
+    }
+
+    .filter__option input {
+        padding: 5px 10px;
+        font-size: 20px;
+        margin: 3px 10px;
+    }
+}
