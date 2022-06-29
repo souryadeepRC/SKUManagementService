@@ -3,6 +3,7 @@ import ItemContext from "../../../../store/item-context"
 import FilterInput from "./FilterInput/FilterInput"
 import FilterOption from "./FilterOption/FilterOption" 
 const RecordFilter = () => { 
+    console.log('RecordFilter CALLED'); 
     
     const itemCtx = useContext(ItemContext)
     const [filterId, setFilterId] = useState('1') 
@@ -33,4 +34,4 @@ const RecordFilter = () => {
         </div>
     )
 }
-export default RecordFilter
+export default  React.memo(RecordFilter)

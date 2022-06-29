@@ -7,6 +7,7 @@ const ItemContext = React.createContext({
     itemData: [],
     filteredData: [],
     addItem: (itemList) => { },
+    updateItem: (item) => { },
     filterById: (id) => { },
     filterBySku: (sku) => { },
     filterByName: (name) => { },
@@ -27,6 +28,15 @@ const itemReducer = (state, action) => {
                 date: new Date(element.Date)
             })
         });
+        return {
+            itemData: convertedData,
+            filteredData: convertedData
+        }
+    }else if (action.type === 'UPDATE') {
+        const convertedData = state.itemData
+        const itemIdex = convertedData.findIndex(item => item.id===action.item.id)
+        convertedData[itemIdex]=action.item
+        
         return {
             itemData: convertedData,
             filteredData: convertedData
@@ -80,6 +90,7 @@ export const ItemContextProvider = (props) => {
         itemData: itemInfo.itemData,
         filteredData: itemInfo.filteredData,
         addItem: itemList => dispatchAction({ type: 'ADD', itemList: itemList }),
+        updateItem: (item) => dispatchAction({ type: 'UPDATE', item }),
         filterById: id => dispatchAction({ type: 'ID', id }),
         filterBySku: (sku) => { dispatchAction({ type: 'SKU', sku }) },
         filterByName: (name) => { dispatchAction({ type: 'NAME', name }) },

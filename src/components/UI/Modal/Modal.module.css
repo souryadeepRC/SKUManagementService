@@ -1,0 +1,16 @@
+.modal__backdrop{
+    background: black;
+    width: 100%;
+    height: 100vh;
+    opacity: 0.25;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.modal__overlay{
+    width: 60%;
+    position: fixed;
+    top: 20%;
+    left: 15%;
+    background: white;
+}
