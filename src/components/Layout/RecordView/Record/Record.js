@@ -1,3 +1,6 @@
+import classes from './Record.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 const Record = (props) => {
 
     const recordHeader = (
@@ -11,26 +14,30 @@ const Record = (props) => {
             </tr>
         </thead>)
     if (props.data.length === 0) {
-        return (<div><p>No Records found!</p></div>)
+        return (<p className={classes.empty__record}>No Records found!</p>)
     }
     console.log('Record :=',props.data);
+    const editItemHandler = (event) => {
+        event.preventDefault()
+        console.log(event.target.id);
+    }
     return (
-        <div>
-            <table>
-                {recordHeader}
-                <tbody>
+        <div> 
+                <div className={classes.item__section}>
                     {props.data.map(item => {
                         return (
-                        <tr key={item.ID}>
-                            <td>{item.ID}</td>
-                            <td>{item.SKU}</td>
-                            <td>{item['Product Name']}</td>
-                            <td>{item.Price}</td>
-                            <td>{item.Date}</td>
-                        </tr>)
+                        <div key={item.ID}>
+                            <p><b>ID : </b>{item.ID}</p>
+                            <p><b>SKU :  </b>{item.SKU}</p>
+                            <p><b>Name : </b> {item['Product Name']}</p>
+                            <p><b>Price : </b> Rs. {item.Price}</p>
+                            <p><b>Date : </b> {item.Date}</p>
+                            <div className={classes.item__edit_section} >
+                                <button id={item.ID} onClick={editItemHandler}><FontAwesomeIcon icon={faEdit} />&nbsp;Edit</button>
+                                </div>
+                        </div>)
                     })}
-                </tbody>
-            </table>
+                </div> 
         </div>
     )
 }
