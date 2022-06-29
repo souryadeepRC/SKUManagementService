@@ -1,22 +1,16 @@
 import classes from './Record.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
-const Record = (props) => {
+import ItemContext from '../../../../store/item-context'
+import { useContext } from 'react'
+const Record = () => {
 
-    const recordHeader = (
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>SKU</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Data</th>
-            </tr>
-        </thead>)
-    if (props.data.length === 0) {
+    const itemCtx = useContext(ItemContext)
+    const {filteredData : data} = itemCtx
+    if (data.length === 0) {
         return (<p className={classes.empty__record}>No Records found!</p>)
     }
-    console.log('Record :=',props.data);
+    console.log('Record :=',data);
     const editItemHandler = (event) => {
         event.preventDefault()
         console.log(event.target.id);
@@ -24,16 +18,17 @@ const Record = (props) => {
     return (
         <div> 
                 <div className={classes.item__section}>
-                    {props.data.map(item => {
+                    {data.map(item => {
+                        const convertedDate = item.date.toLocaleDateString('en-US',{year: 'numeric', month: 'long', day: 'numeric' })
                         return (
-                        <div key={item.ID}>
-                            <p><b>ID : </b>{item.ID}</p>
-                            <p><b>SKU :  </b>{item.SKU}</p>
-                            <p><b>Name : </b> {item['Product Name']}</p>
-                            <p><b>Price : </b> Rs. {item.Price}</p>
-                            <p><b>Date : </b> {item.Date}</p>
+                        <div key={item.id}>
+                            <p><b>ID : </b>{item.id}</p>
+                            <p><b>SKU :  </b>{item.sku}</p>
+                            <p><b>Name : </b> {item.productName}</p>
+                            <p><b>Price : </b> Rs. {item.price}</p>
+                            <p><b>Date : </b> {convertedDate}</p>
                             <div className={classes.item__edit_section} >
-                                <button id={item.ID} onClick={editItemHandler}><FontAwesomeIcon icon={faEdit} />&nbsp;Edit</button>
+                                <button id={item.id} onClick={editItemHandler}><FontAwesomeIcon icon={faEdit} />&nbsp;Edit</button>
                                 </div>
                         </div>)
                     })}

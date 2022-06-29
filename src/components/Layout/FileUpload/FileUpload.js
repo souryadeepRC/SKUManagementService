@@ -1,44 +1,46 @@
 import classes from './FileUpload.module.css'
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Papa from "papaparse";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
+import ItemContext from '../../../store/item-context';
 
 const allowedExtensions = ["csv"];
 const FileUpload = (props) => {
-    console.log('FileUpload CALLED');
-    
-    const [data, setData] = useState(undefined); 
+    const itemContext = useContext(ItemContext)
+
+    const [isDataPresent, setIsDataPresent] = useState(false);
     const [error, setError] = useState('');
-    const [isLoading,setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const getFileData = async (event) => {
         setIsLoading(true)
         if (event.target.files.length) {
-            const inputFile = event.target.files[0]; 
+            const inputFile = event.target.files[0];
             const fileExtension = inputFile?.type.split("/")[1];
             if (!allowedExtensions.includes(fileExtension)) {
-                throw new Error("Please input a csv file"); 
+                throw new Error("Please input a csv file");
             }
             if (!inputFile) throw new Error("Enter a valid file");
- 
+
             const reader = new FileReader();
             reader.onload = async ({ target }) => {
                 const csv = Papa.parse(target.result, { header: true });
                 const parsedData = csv?.data;
-                 
-                setData(parsedData)
+
+                itemContext.addItem(parsedData)
+                setIsDataPresent(true)
                 setError('')
-                setIsLoading(false) 
+                setIsLoading(false)
             };
             reader.readAsText(inputFile);
         }
     }
     const handleFileChange = async (event) => {
-         
+
         try {
-            await getFileData(event) 
+            await getFileData(event)
         } catch (error) {
             console.log(error);
             setError(error.message)
@@ -46,10 +48,9 @@ const FileUpload = (props) => {
         }
     };
     const viewReportHandler = () => {
-        props.onFileUpload(data)
+        props.onFileUpload()
     }
-    
-    console.log(data);
+
     return (
         <div className={classes.file_upload__container}>
             <p className={classes.file_upload__text}>Upload CSV File here</p>
@@ -61,8 +62,8 @@ const FileUpload = (props) => {
                 </label>
             </div>
             {isLoading && <p>Loading...</p>}
-            {error!=='' && <p className={`${classes.message} ${classes.error__message}`}>{error}</p>}
-            {data && 
+            {error !== '' && <p className={`${classes.message} ${classes.error__message}`}>{error}</p>}
+            {error === '' && isDataPresent &&
                 <div className={classes.valid__data_box}>
                     <p className={`${classes.message} ${classes.success__message}`}>Data uploaded successfully</p>
                     <button className={classes.view__btn} onClick={viewReportHandler}>View Report</button>
