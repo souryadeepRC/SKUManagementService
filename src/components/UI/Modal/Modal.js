@@ -11,7 +11,7 @@ const Modal = (props) => {
     
     return (
         <Fragment>
-            {ReactDOM.createPortal(<ModalBackdrop onClick={props.onClick}/>
+            {ReactDOM.createPortal(<ModalBackdrop onClick={props.onEditComplete}/>
                 ,document.getElementById('ModalBackdrop'))}
             {ReactDOM.createPortal(
                 <ModalOverlay>{props.content}</ModalOverlay>

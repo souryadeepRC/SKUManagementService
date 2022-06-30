@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import ItemContext from "../../../store/item-context"
-
+import classes from './RecordEdit.module.css'
 const pad2 = (n) => {
     return (n < 10 ? '0' : '') + n;
 }
@@ -15,9 +15,7 @@ const RecordEdit = (props) => {
     const filterByPriceRef = React.createRef()
     const filterByDateRef = React.createRef()
 
-    //const [formInfo,setFormInfo] = useState(initialState)
-
-    //console.log(formInfo);
+ 
     const date = item.date;
     const month = pad2(date.getMonth() + 1);//months (0-11)
     const day = pad2(date.getDate());//day (1-31)
@@ -38,8 +36,8 @@ const RecordEdit = (props) => {
         props.onEditComplete();
     }
     return (
-        <form onSubmit={submitEditFormHandler}>
-            <div>
+        <form className={classes.edit__form_section} onSubmit={submitEditFormHandler}>
+            <div className={classes.form__element__container}>
                 <div>
                     <label>ID : {item.id}</label>
                 </div>
@@ -61,8 +59,9 @@ const RecordEdit = (props) => {
                 </div>
             </div>
 
-            <div>
-                <button>Edit the Record</button>
+            <div className={classes.form__btn__container}>
+                <button>Save</button>
+                <button onClick={props.onEditComplete}>Cancel</button>
             </div>
         </form>
     )
