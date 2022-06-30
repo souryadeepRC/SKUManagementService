@@ -50,8 +50,7 @@ const FilterInput = (props) => {
             }
         } else if (filterType === 'number') {
             const startPrice = parseFloat(filterByFromPriceRef.current.value)
-            const endPrice = parseFloat(filterByToPriceRef.current.value)
-            console.log(startPrice,endPrice);
+            const endPrice = parseFloat(filterByToPriceRef.current.value) 
             if(startPrice>0 && endPrice>0 && !isNaN(startPrice)&& !isNaN(endPrice)){
                 props.onFilterChoice({startPrice,endPrice})
                 setError('')

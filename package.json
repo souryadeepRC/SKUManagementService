@@ -1,7 +1,7 @@
 {
   "name": "sku_management_service",
   "homepage": "https://souryadeeprc.github.io/SKUManagementService",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",

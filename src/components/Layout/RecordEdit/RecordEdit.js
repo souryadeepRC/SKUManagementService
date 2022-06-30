@@ -21,8 +21,7 @@ const RecordEdit = (props) => {
     const day = pad2(date.getDate());//day (1-31)
     const year = date.getFullYear();
 
-    const formattedDate = `${year}-${month}-${day}`
-    console.log(formattedDate);
+    const formattedDate = `${year}-${month}-${day}` 
     const submitEditFormHandler = (event) => {
         event.preventDefault()
          

@@ -3,15 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import ItemContext from '../../../../store/item-context' 
 import React, { useContext } from 'react'
-const Record = (props) => {
-    console.log('Record CALLED'); 
+const Record = (props) => { 
 
     const itemCtx = useContext(ItemContext)
     const { filteredData: data } = itemCtx
     if (data.length === 0) {
         return (<p className={classes.empty__record}>No Records found!</p>)
-    }
-    console.log('Record :=', data);
+    } 
     const editItemHandler = (event) => {
         event.preventDefault() 
         props.onshowModal(event.target.id)

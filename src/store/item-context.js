@@ -53,11 +53,8 @@ const itemReducer = (state, action) => {
             itemData: state.itemData,
             filteredData
         }
-    } else if (action.type === 'NAME') {
-        console.log(action.name);
-        const filteredData = state.itemData.filter(item => item.productName.toLowerCase().includes(action.name.toLowerCase()))
-        console.log(state.itemData);
-        console.log(filteredData);
+    } else if (action.type === 'NAME') { 
+        const filteredData = state.itemData.filter(item => item.productName.toLowerCase().includes(action.name.toLowerCase())) 
         return {
             itemData: state.itemData,
             filteredData
